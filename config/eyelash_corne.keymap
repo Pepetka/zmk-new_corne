@@ -75,20 +75,33 @@
             require-prior-idle-ms = <150>;
             hold-trigger-key-positions = <0 1 2 3 4 5 13 14 15 16 17 18 28 29 30 31 32 33 42 43 44>;
         };
-    };
 
-    rgb_encoder: rgb_encoder {
-        compatible = "zmk,behavior-sensor-rotate";
-        #sensor-binding-cells = <0>;
-        bindings = <&rgb_ug RGB_BRI>, <&rgb_ug RGB_BRD>;
-    };
+        option_lang: option_lang {
+            compatible = "zmk,behavior-tap-dance";
+            display-name = "Shift/Caps Lock Tap Dance";
+            #binding-cells = <0>;
+            bindings = <&kp LEFT_ALT>, <&kp LC(SPACE)>;
 
-    scroll_encoder: scroll_encoder {
-        compatible = "zmk,behavior-sensor-rotate";
-        #sensor-binding-cells = <0>;
-        bindings = <&msc SCRL_DOWN>, <&msc SCRL_UP>;
+            label = "OPTION_LANG";
+        };
 
-        tap-ms = <100>;
+        alt_lang: alt_lang {
+            compatible = "zmk,behavior-tap-dance";
+            display-name = "Shift/Caps Lock Tap Dance";
+            #binding-cells = <0>;
+            bindings = <&kp LEFT_ALT>, <&kp LA(LEFT_SHIFT)>;
+
+            label = "ALT_LANG";
+        };
+
+        gui_tog: gui_tog {
+            compatible = "zmk,behavior-tap-dance";
+            display-name = "Shift/Caps Lock Tap Dance";
+            #binding-cells = <0>;
+            bindings = <&kp LEFT_GUI>, <&tog 1>;
+
+            label = "GUI_TOG";
+        };
     };
 
     macros {
@@ -127,7 +140,7 @@
             bindings =
                 <&kp GRAVE &kp GRAVE &kp GRAVE>,
                 <&macro_wait_time 10>,
-                <&kp ENTER &kp ENTER>,
+                <&kp LS(ENTER) &kp LS(ENTER)>,
                 <&macro_wait_time 10>,
                 <&kp GRAVE &kp GRAVE &kp GRAVE>,
                 <&macro_wait_time 10>,
@@ -148,23 +161,43 @@
     keymap {
         compatible = "zmk,keymap";
 
-        default_layer {
-            display-name = "QWERTY";
+        default_layer_mac {
+            display-name = "MAC";
             bindings = <
-&kp TAB      &kp Q             &kp W             &kp E                 &kp R               &kp T                                    &kp C_BRIGHTNESS_INC                   &kp Y        &kp U                &kp I                  &kp O              &kp P                 &kp BSPC
-&ctrl_tmux   &hrml LEFT_GUI A  &hrml LEFT_ALT S  &hrml LEFT_CONTROL D  &hrml LEFT_SHIFT F  &kp G                 &kp C_VOLUME_DOWN  &kp ENTER             &kp C_VOLUME_UP  &kp H        &hrmr RIGHT_SHIFT J  &hrmr RIGHT_CONTROL K  &hrmr RIGHT_ALT L  &hrmr RIGHT_GUI SEMI  &kp SQT
-&shift_caps  &kp Z             &kp X             &kp C                 &kp V               &kp B        &none                       &kp C_BRIGHTNESS_DEC                   &kp N        &kp M                &kp COMMA              &kp DOT            &kp FSLH              &kp ESC
-                                                 &kp LGUI              &mo 1               &lt 3 SPACE                                                                     &lt 3 ENTER  &mo 2                &kp RALT
+&kp TAB      &kp Q             &kp W             &kp E                 &kp R               &kp T                                         &kp C_BRIGHTNESS_INC                   &kp Y              &kp U                &kp I                  &kp O              &kp P                 &kp BSPC
+&ctrl_tmux   &hrml LEFT_GUI A  &hrml LEFT_ALT S  &hrml LEFT_CONTROL D  &hrml LEFT_SHIFT F  &hrml LEFT_GUI G           &kp C_VOLUME_DOWN  &kp ENTER             &kp C_VOLUME_UP  &hrmr RIGHT_GUI H  &hrmr RIGHT_SHIFT J  &hrmr RIGHT_CONTROL K  &hrmr RIGHT_ALT L  &hrmr RIGHT_GUI SEMI  &kp SQT
+&shift_caps  &kp Z             &kp X             &kp C                 &kp V               &kp B             &none                       &kp C_BRIGHTNESS_DEC                   &kp N              &kp M                &kp COMMA              &kp DOT            &kp FSLH              &kp ESC
+                                                 &gui_tog              &mo 2               &lt 5 SPACE                                                                          &lt 5 ENTER        &mo 4                &option_lang
             >;
         };
 
-        lower_layer {
+        default_layer_win {
+            display-name = "WIN";
+            bindings = <
+&kp TAB      &kp Q             &kp W             &kp E                 &kp R               &kp T                                         &kp C_BRIGHTNESS_INC                   &kp Y              &kp U                &kp I                  &kp O              &kp P                 &kp BSPC
+&ctrl_tmux   &hrml LEFT_GUI A  &hrml LEFT_ALT S  &hrml LEFT_CONTROL D  &hrml LEFT_SHIFT F  &hrml LEFT_ALT G           &kp C_VOLUME_DOWN  &kp ENTER             &kp C_VOLUME_UP  &hrmr RIGHT_ALT H  &hrmr RIGHT_SHIFT J  &hrmr RIGHT_CONTROL K  &hrmr RIGHT_ALT L  &hrmr RIGHT_GUI SEMI  &kp SQT
+&shift_caps  &kp Z             &kp X             &kp C                 &kp V               &kp B             &none                       &kp C_BRIGHTNESS_DEC                   &kp N              &kp M                &kp COMMA              &kp DOT            &kp FSLH              &kp ESC
+                                                 &gui_tog              &mo 2               &lt 5 SPACE                                                                          &lt 5 ENTER        &mo 4                &alt_lang
+            >;
+        };
+
+        lower_layer_mac {
             display-name = "NUMBER";
             bindings = <
-&trans              &kp N1     &kp N2     &kp N3     &kp N4     &kp N5                              &mmv MOVE_UP                     &kp N6    &kp N7    &kp N8  &kp N9     &kp N0  &kp BSPC
-&kp LA(LEFT_SHIFT)  &kp LC(Z)  &kp LC(X)  &kp LC(C)  &kp LC(V)  &kp LA(Z)           &mmv MOVE_LEFT  &mkp LCLK       &mmv MOVE_RIGHT  &kp LEFT  &kp DOWN  &kp UP  &kp RIGHT  &none   &template
-&kp LC(SPACE)       &kp LG(Z)  &kp LG(X)  &kp LG(C)  &kp LG(V)  &none      &none                    &mmv MOVE_DOWN                   &none     &none     &none   &none      &none   &none
-                                          &trans     &trans     &trans                                                               &trans    &trans    &trans
+&trans  &kp N1     &kp N2     &kp N3     &kp N4     &kp N5                           &mmv MOVE_UP                     &kp N6    &kp N7    &kp N8  &kp N9     &kp N0  &kp BSPC
+&none   &kp LG(Z)  &kp LG(X)  &kp LG(C)  &kp LG(V)  &none            &mmv MOVE_LEFT  &mkp LCLK       &mmv MOVE_RIGHT  &kp LEFT  &kp DOWN  &kp UP  &kp RIGHT  &none   &template
+&none   &none      &none      &none      &none      &none   &none                    &mmv MOVE_DOWN                   &none     &none     &none   &none      &none   &none
+                              &trans     &trans     &trans                                                            &trans    &trans    &trans
+            >;
+        };
+
+        lower_layer_win {
+            display-name = "NUMBER";
+            bindings = <
+&trans  &kp N1     &kp N2     &kp N3     &kp N4     &kp N5                           &mmv MOVE_UP                     &kp N6    &kp N7    &kp N8  &kp N9     &kp N0  &kp BSPC
+&none   &kp LC(Z)  &kp LC(X)  &kp LC(C)  &kp LC(V)  &none            &mmv MOVE_LEFT  &mkp LCLK       &mmv MOVE_RIGHT  &kp LEFT  &kp DOWN  &kp UP  &kp RIGHT  &none   &template
+&none   &none      &none      &none      &none      &none   &none                    &mmv MOVE_DOWN                   &none     &none     &none   &none      &none   &none
+                              &trans     &trans     &trans                                                            &trans    &trans    &trans
             >;
         };
 
