@@ -177,7 +177,7 @@
 &kp TAB      &kp Q             &kp W             &kp E                 &kp R               &kp T                                         &kp C_BRIGHTNESS_INC                   &kp Y              &kp U                &kp I                  &kp O              &kp P                 &kp BSPC
 &ctrl_tmux   &hrml LEFT_GUI A  &hrml LEFT_ALT S  &hrml LEFT_CONTROL D  &hrml LEFT_SHIFT F  &hrml LEFT_ALT G           &kp C_VOLUME_DOWN  &kp ENTER             &kp C_VOLUME_UP  &hrmr RIGHT_ALT H  &hrmr RIGHT_SHIFT J  &hrmr RIGHT_CONTROL K  &hrmr RIGHT_ALT L  &hrmr RIGHT_GUI SEMI  &kp SQT
 &shift_caps  &kp Z             &kp X             &kp C                 &kp V               &kp B             &none                       &kp C_BRIGHTNESS_DEC                   &kp N              &kp M                &kp COMMA              &kp DOT            &kp FSLH              &kp ESC
-                                                 &gui_tog              &mo 2               &lt 5 SPACE                                                                          &lt 5 ENTER        &mo 4                &alt_lang
+                                                 &gui_tog              &mo 3               &lt 5 SPACE                                                                          &lt 5 ENTER        &mo 4                &alt_lang
             >;
         };
 
@@ -194,10 +194,10 @@
         lower_layer_win {
             display-name = "NUMBER";
             bindings = <
-&trans  &kp N1     &kp N2     &kp N3     &kp N4     &kp N5                           &mmv MOVE_UP                     &kp N6    &kp N7    &kp N8  &kp N9     &kp N0  &kp BSPC
-&none   &kp LC(Z)  &kp LC(X)  &kp LC(C)  &kp LC(V)  &none            &mmv MOVE_LEFT  &mkp LCLK       &mmv MOVE_RIGHT  &kp LEFT  &kp DOWN  &kp UP  &kp RIGHT  &none   &template
-&none   &none      &none      &none      &none      &none   &none                    &mmv MOVE_DOWN                   &none     &none     &none   &none      &none   &none
-                              &trans     &trans     &trans                                                            &trans    &trans    &trans
+&trans  &kp N1         &kp N2         &kp N3         &kp N4         &kp N5                           &mmv MOVE_UP                     &kp N6    &kp N7    &kp N8  &kp N9     &kp N0  &kp BSPC
+&none   &kp LC(LS(Z))  &kp LC(LS(X))  &kp LC(LS(C))  &kp LC(LS(V))  &none            &mmv MOVE_LEFT  &mkp LCLK       &mmv MOVE_RIGHT  &kp LEFT  &kp DOWN  &kp UP  &kp RIGHT  &none   &template
+&none   &none          &none          &none          &none          &none   &none                    &mmv MOVE_DOWN                   &none     &none     &none   &none      &none   &none
+                                      &trans         &trans         &trans                                                            &trans    &trans    &trans
             >;
         };
 
